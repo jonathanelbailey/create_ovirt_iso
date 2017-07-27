@@ -5,7 +5,7 @@ set -x
 
 # download dependencies
 apt update
-apt install nfs-common genisoimage
+apt install nfs-common genisoimage -y
 
 # Create the working and mount directories
 mkdir -p /tmp/work/bootiso
