@@ -8,7 +8,7 @@ mkdir -p /tmp/work/bootiso
 ovirt_latest_url="http://jenkins.ovirt.org/job/ovirt-node-ng_master_build-artifacts-el7-x86_64/lastSuccessfulBuild/artifact/exported-artifacts/"
 
 # find the latest ovirt iso version
-ovirt_iso_name=$(curl $ovirt_latest_url/latest-installation-iso.html | grep -o '".*"' -m1)
+ovirt_iso_name=$(curl "$ovirt_latest_url/latest-installation-iso.html" | grep -o '".*"' -m1)
 
 # join iso name and url
 
