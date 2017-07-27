@@ -1,0 +1,63 @@
+#! /bin/bash set -e
+
+# Create the working and mount directories
+mkdir -p /tmp/work/bootiso
+
+ovirt_latest_url="http://jenkins.ovirt.org/job/ovirt-node-ng_master_build-artifacts-el7-x86_64/lastSuccessfulBuild/artifact/exported-artifacts/"
+
+# find the latest ovirt iso version
+ovirt_iso_name=$(curl $ovirt_latest_url/latest-installation-iso.html | grep -o '".*"' -m1)
+
+# join iso name and url
+
+
+# Download the ISO artifact from the ovirt jenkins link.
+curl $ovirt_iso_url/$ovirt_iso_name  -o /tmp/work/$ovirt_iso_name
+  
+# Mount the iso
+mount -o loop /tmp/work/$ovirt_iso_name /tmp/work/bootiso
+# Create the iso working folder and copy the contents of the ISO there.
+mkdir /tmp/work/bootisoks
+cp -r /tmp/work/bootiso/* /tmp/work/bootisoks/
+
+#unmount the ISO and rm the mount point.
+umount /tmp/work/bootiso && rmdir /tmp/work/bootiso
+
+# Mod permissions
+chmod -R u+w /tmp/work/bootisoks
+
+# Copy the isolinux.cfg file to a seperate workspace.
+cp /tmp/work/bootisoks/isolinux/isolinux.cfg /tmp/work/isolinux.cfg
+
+# Add stage2 and ks cfg
+sed -i \
+  's/inst.stage2=hd:LABEL=CentOS\\x207\\x20x86_64//' \
+  /tmp/work/isolinux.cfg
+sed -i \
+  's/inst.ks=hd:LABEL=CentOS\\x207\\x20x86_64:\/interactive-defaults.ks/inst.ks=https:\/\/gist.githubusercontent.com\/jonathanelbailey\/b2ba868d39491f4e6a7497010b0f6b18\/raw\/ inst.stage2="http:\/\/mirror.centos.org\/centos\/7\/os\/x86_64\/"/' \
+  /tmp/work/isolinux.cfg
+# Clean up extra params
+sed -i \
+  's/quiet//' /tmp/work/isolinux.cfg
+sed -i \
+  's/rd.live.check//' /tmp/work/isolinux.cfg
+sed -i \
+  's/nomodeset//' /tmp/work/isolinux.cfg
+
+# Copy config to iso filesystem.
+yes | cp /tmp/work/isolinux.cfg /tmp/work/bootisoks/isolinux/isolinux.cfg -f
+
+# Create ISO
+cd /tmp/work/bootisoks && genisoimage -o /tmp/$ovirt_iso_name -b isolinux.bin -c boot.cat \
+  -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -v -T isolinux/. .
+
+# mount nfs drive
+mkdir /tmp/mnt/
+mount -t nfs nfs1.magiccityit.com:/data-volume/ovirt-node-isos/:/tmp/mnt/
+ovirt_iso_path=${ovirt_iso_name:1:-4}
+mkdir /tmp/mnt/$ovirt_iso_path
+cp -r /tmp/work/bootiso/* /tmp/mnt/$ovirt_iso_path/
+
+
+# cleanup
+rm /tmp/work -rf
