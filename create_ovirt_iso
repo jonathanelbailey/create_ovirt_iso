@@ -1,4 +1,6 @@
-#! /bin/bash set -e
+#! /bin/bash
+
+set -e
 
 # Create the working and mount directories
 mkdir -p /tmp/work/bootiso
