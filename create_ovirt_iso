@@ -41,7 +41,7 @@ sed -i \
   's/inst.stage2=hd:LABEL=CentOS\\x207\\x20x86_64//' \
   /tmp/work/isolinux.cfg
 sed -i \
-  's/inst.ks=hd:LABEL=CentOS\\x207\\x20x86_64:\/interactive-defaults.ks/inst.ks=https:\/\/gist.githubusercontent.com\/jonathanelbailey\/b2ba868d39491f4e6a7497010b0f6b18\/raw\/ inst.stage2="http:\/\/mirror.centos.org\/centos\/7\/os\/x86_64\/"/' \
+  's/inst.ks=hd:LABEL=CentOS\\x207\\x20x86_64:\/interactive-defaults.ks/inst.ks=https:\/\/raw.githubusercontent.com\/jonathanelbailey\/create_ovirt_iso\/master\/ovirt_node-ks.cfg inst.stage2="http:\/\/mirror.centos.org\/centos\/7\/os\/x86_64\/"/' \
   /tmp/work/isolinux.cfg
 # Clean up extra params
 sed -i \
