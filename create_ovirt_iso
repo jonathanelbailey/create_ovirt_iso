@@ -63,8 +63,10 @@ cd ..
 mkdir mnt/
 mount -t nfs nfs1.magiccityit.com:/data-volume/ovirt-node-isos/ mnt/
 ovirt_iso_path=${ovirt_iso_name:0:-4}
-mkdir mnt/$ovirt_iso_path
-cp -r work/bootisoks/* mnt/$ovirt_iso_path/
+if [ ! -d "mnt/$ovirt_iso_path" ]; then
+  mkdir mnt/$ovirt_iso_path
+fi
+cp -r bootisoks/* mnt/$ovirt_iso_path/
 
 
 # cleanup
