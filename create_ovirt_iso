@@ -67,7 +67,7 @@ if [ ! -d "mnt/$ovirt_iso_path" ]; then
   mkdir mnt/$ovirt_iso_path
 fi
 cp -r bootisoks/* mnt/$ovirt_iso_path/
-
+umount mnt/
 
 # cleanup
 rm work -rf
