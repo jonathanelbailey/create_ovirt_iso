@@ -61,9 +61,9 @@ cd work/bootisoks && genisoimage -o $ovirt_iso_name -b isolinux.bin -c boot.cat 
 # mount nfs drive
 mkdir mnt/
 mount -t nfs nfs1.magiccityit.com:/data-volume/ovirt-node-isos/ mnt/
-ovirt_iso_path=${ovirt_iso_name:1:-4}
+ovirt_iso_path=${ovirt_iso_name:0:-4}
 mkdir mnt/$ovirt_iso_path
-cp -r work/bootiso/* mnt/$ovirt_iso_path/
+cp -r work/bootisoks/* mnt/$ovirt_iso_path/
 
 
 # cleanup
