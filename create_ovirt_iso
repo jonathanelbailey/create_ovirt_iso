@@ -58,6 +58,7 @@ yes | cp work/isolinux.cfg work/bootisoks/isolinux/isolinux.cfg -f
 cd work/bootisoks && genisoimage -o $ovirt_iso_name -b isolinux.bin -c boot.cat \
   -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -v -T isolinux/. .
 
+cd ..
 # mount nfs drive
 mkdir mnt/
 mount -t nfs nfs1.magiccityit.com:/data-volume/ovirt-node-isos/ mnt/
