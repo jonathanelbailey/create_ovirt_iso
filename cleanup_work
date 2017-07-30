@@ -1,9 +1,11 @@
 #! /bin/bash
+set -e
+set -x
 #unmount the ISO
 umount work/bootiso
 
 # unmount the nfs share
-umount mnt/
+umount work/mnt/
 
 # cleanup
 rm work -rf
