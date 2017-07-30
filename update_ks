@@ -5,7 +5,7 @@ set -x
 
 cp ovirt_node-ks.template.cfg ovirt_node-ks.cfg
 chmod +x extract_json
-$live_img_url=$(sudo ./extract_json --object-type 'iso_file_url')
-$squashfs=$(sudo ./extract_json --object-type 'squashfs_file_name')
+live_img_url=$(sudo ./extract_json --object-type 'iso_file_url')
+squashfs=$(sudo ./extract_json --object-type 'squashfs_file_name')
 sed -i "s/liveimg --url=\"<REPLACE_ME>\"/liveimg --url=\"$live_img_url\/$squashfs\"/" ovirt_node-ks.cfg
 cp ovirt_node-ks.cfg work/mnt/ovirt_node-ks.cfg
