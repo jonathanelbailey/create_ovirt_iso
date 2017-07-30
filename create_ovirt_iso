@@ -63,7 +63,7 @@ if [ ! -d "mnt/$ovirt_iso_path" ]; then
   mkdir mnt/$ovirt_iso_path
 fi
 cp bootisoks/ovirt-node-ng-image.squashfs.img mnt/$ovirt_iso_path/ovirt-node-ng-image.squashfs.img
-cp $ovirt_iso_name /mnt/$ovirt_iso_path/$ovirt_iso_name
+cp bootisoks/$ovirt_iso_name /mnt/$ovirt_iso_path/$ovirt_iso_name
 
 # create json object
 echo "{'iso_file_name': $ovirt_iso_name,'squashfs_file_name': 'ovirt-node-ng-image.squashfs.img', 'iso_file_url': \"http://nas1.magiccityit.com/ovirt-node-isos/$ovirt_iso_path\" }" > ovirt_iso_env.json
