@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import argparse
+import json
 
 parser = argparse.ArgumentParser(description='determines what object property to print')
 parser.add_argument('--object-type', required=True)
@@ -8,15 +9,15 @@ args = vars(parser.parse_args())
 
 if args['object_type'] == 'iso_file_url':
     with open('ovirt_iso_env.json') as f:
-        data = f.read()
+        data = json.load(f)
     print(data['iso_file_url'])
 if args['object_type'] == 'iso_file_name':
     with open('ovirt_iso_env.json') as f:
-        data = f.read()
+        data = json.load(f)
     print(data['iso_file_name'])
 if args['object_type'] == 'squashfs_file_name':
     with open('ovirt_iso_env.json') as f:
-        data = f.read()
+        data = json.load(f)
     print(data['squashfs_file_name'])
 
 else:
