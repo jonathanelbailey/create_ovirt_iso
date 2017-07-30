@@ -1,0 +1,9 @@
+#! /bin/bash
+#unmount the ISO
+umount work/bootiso
+
+# unmount the nfs share
+umount mnt/
+
+# cleanup
+rm work -rf

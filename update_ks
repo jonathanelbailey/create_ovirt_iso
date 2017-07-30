@@ -1,0 +1,5 @@
+#! /bin/bash
+
+cp ovirt_node-ks.template.cfg ovirt_node-ks.cfg
+$live_img_url=$(./extract_json)
+sed -i "s/liveimg --url=\"<REPLACE_ME>\"/liveimg --url=\"$live_img_url\"/" ovirt_node-ks.cfg

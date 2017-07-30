@@ -27,9 +27,6 @@ mount -o loop work/$ovirt_iso_name work/bootiso
 mkdir work/bootisoks
 cp -r work/bootiso/* work/bootisoks/
 
-#unmount the ISO and rm the mount point.
-umount work/bootiso && rmdir work/bootiso
-
 # Mod permissions
 chmod -R u+w work/bootisoks
 
@@ -41,7 +38,7 @@ sed -i \
   's/inst.stage2=hd:LABEL=CentOS\\x207\\x20x86_64//' \
   work/isolinux.cfg
 sed -i \
-  's/inst.ks=hd:LABEL=CentOS\\x207\\x20x86_64:\/interactive-defaults.ks/inst.ks=https:\/\/raw.githubusercontent.com\/jonathanelbailey\/create_ovirt_iso\/master\/ovirt_node-ks.cfg inst.stage2="http:\/\/mirror.centos.org\/centos\/7\/os\/x86_64\/"/' \
+  's/inst.ks=hd:LABEL=CentOS\\x207\\x20x86_64:\/interactive-defaults.ks/inst.ks=http:\/\/nas1.magiccityit.com\/ovirt-node-isos\/ovirt_node-ks.cfg inst.stage2="http:\/\/mirror.centos.org\/centos\/7\/os\/x86_64\/"/' \
   work/isolinux.cfg
 # Clean up extra params
 sed -i \
@@ -67,7 +64,6 @@ if [ ! -d "mnt/$ovirt_iso_path" ]; then
   mkdir mnt/$ovirt_iso_path
 fi
 cp -r bootisoks/* mnt/$ovirt_iso_path/
-umount mnt/
 
-# cleanup
-rm work -rf
+# create json object
+echo "{'iso_file_name': $ovirt_iso_name,'squashfs_file_name': 'ovirt-node-ng-image.squashfs.img', 'iso_file_url': \"http://nas1.magiccityit.com/ovirt-node-isos/$ovirt_iso_path\" }" > ovirt_iso_env.json
