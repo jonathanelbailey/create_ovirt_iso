@@ -67,4 +67,4 @@ cp bootisoks/$ovirt_iso_name mnt/$ovirt_iso_path/$ovirt_iso_name
 
 # create json object
 echo "{'iso_file_name': $ovirt_iso_name,'squashfs_file_name': 'ovirt-node-ng-image.squashfs.img', 'iso_file_url': \"http://nas1.magiccityit.com/ovirt-node-isos/$ovirt_iso_path\" }" > ovirt_iso_env.json
-cp ovirt_iso_env.json  mnt/$ovirt_iso_path/ovirt_iso_env.json
+cp ovirt_iso_env.json  mnt/ovirt_iso_env.json
