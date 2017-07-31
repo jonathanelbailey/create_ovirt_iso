@@ -8,14 +8,14 @@ parser.add_argument('--object-type', required=True)
 args = vars(parser.parse_args())
 
 if args['object_type'] == 'iso_file_url':
-    with open('ovirt_iso_env.json') as f:
+    with open('work/mnt/ovirt_iso_env.json') as f:
         data = json.load(f)
     print(data['iso_file_url'])
 if args['object_type'] == 'iso_file_name':
-    with open('ovirt_iso_env.json') as f:
+    with open('work/mnt/ovirt_iso_env.json') as f:
         data = json.load(f)
     print(data['iso_file_name'])
 if args['object_type'] == 'squashfs_file_name':
-    with open('ovirt_iso_env.json') as f:
+    with open('work/mnt/ovirt_iso_env.json') as f:
         data = json.load(f)
     print(data['squashfs_file_name'])
