@@ -9,7 +9,7 @@ apt install nfs-common genisoimage -y
 # Create the working and mount directories
 mkdir -p work/bootiso
 
-ovirt_latest_url="http://jenkins.ovirt.org/job/ovirt-node-ng_master_build-artifacts-el7-x86_64/lastSuccessfulBuild/artifact/exported-artifacts/"
+ovirt_latest_url="http://jenkins.ovirt.org/job/ovirt-node-ng_ovirt-4.1_build-artifacts-el7-x86_64/lastSuccessfulBuild/artifact/exported-artifacts/"
 
 # find the latest ovirt iso version
 ovirt_iso_name_tr=$(curl $ovirt_latest_url/latest-installation-iso.html | grep -o '".*"' -m1)
