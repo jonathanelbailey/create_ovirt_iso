@@ -6,8 +6,8 @@ bootiso_wd='work/bootiso'
 nfs_mnt='work/mnt'
 #unmount the ISO
 if [ -d $bootiso_wd ]; then
-    if [ $(mountpoint -q $bootisoks_wd; echo $?) == 0 ]; then
-        umount $bootisoks_wd
+    if [ $(mountpoint -q $bootiso_wd; echo $?) == 0 ]; then
+        umount $bootiso_wd
     fi
 fi
 
