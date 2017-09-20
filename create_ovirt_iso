@@ -51,7 +51,7 @@ sed -i \
 yes | cp work/isolinux.cfg work/bootisoks/isolinux/isolinux.cfg -f
 
 # Create ISO
-cd work/bootisoks && genisoimage -o $ovirt_iso_name -b isolinux\isolinux.bin -c isolinux\boot.cat \
+cd work/bootisoks && genisoimage -o $ovirt_iso_name -b isolinux/isolinux.bin -c isolinux/boot.cat \
   -no-emul-boot -boot-load-size 4 -boot-info-table -V "CentOS 7 x86_64" -R -J -v -T isolinux/. .
 
 cd ..
