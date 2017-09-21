@@ -3,11 +3,13 @@
 set -e
 set -x
 
-# download dependencies
-apt install nfs-common genisoimage -y
-
 # Create the working and mount directories
 mkdir -p work/bootiso
+
+# download dependencies
+wget "https://launchpad.net/~brandonsnider/+archive/ubuntu/cdrtools/+files/mkisofs_3.02a07-0ubuntu1~xenial~cdrtoolsppa1_amd64.deb"
+dpkg -i "mkisofs_3.02a07-0ubuntu1~xenial~cdrtoolsppa1_amd64.deb"
+apt install nfs-common -y
 
 ovirt_latest_url="http://jenkins.ovirt.org/job/ovirt-node-ng_ovirt-4.1_build-artifacts-el7-x86_64/lastSuccessfulBuild/artifact/exported-artifacts/"
 
@@ -51,7 +53,7 @@ sed -i \
 yes | cp work/isolinux.cfg work/bootisoks/isolinux/isolinux.cfg -f
 
 # Create ISO
-cd work/bootisoks && genisoimage -o $ovirt_iso_name -b isolinux/isolinux.bin -c isolinux/boot.cat \
+cd work/bootisoks && mkisofs -o $ovirt_iso_name -b isolinux/isolinux.bin -c isolinux/boot.cat \
   -no-emul-boot -boot-load-size 4 -boot-info-table -V "CentOS 7 x86_64" -R -J -v -T .
 
 cd ..
